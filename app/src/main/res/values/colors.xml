@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#020d41</color>
+    <color name="colorAccent">#9bb10d</color>
+
+    <!--item_card-->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!--tab-->
+    <color name="txt_selector">#6c28c4</color>
+
+    <!--recycleView_background-->
+    <color name="recycleViewBackground">#B3B34D</color>
+
+    <color name="blue">#00C0FF</color>
+
+    <!--Gray-->
+    <color name="gray">#5B595A</color>
+    <!--light_grey-->
+    <color name="light_grey">#cccaca</color>
+
+    <!--深灰色字体_评论内容-->
+    <color name="comment_dark_gray">#363636</color>
+
+    <color name="comment_reply_blue">#0e6daf</color>
+
+    <color name="comment_like_pressed_red">#de4040</color>
+</resources>

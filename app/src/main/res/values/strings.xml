@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">XunW</string>
+
+    <!--item_card-->
+    <string name="test">this is test!</string>
+
+    <!--menu_nav-->
+    <string name="nav_personal">this is personal</string>
+    <string name="nav_location">this is location</string>
+    <string name="nav_username">username user</string>
+
+    <!--menu_toolbar-->
+    <string name="settings">Settings</string>
+
+    <!--item_tab-->
+    <string name="tab_Home">首页</string>
+    <string name="tab_Near">附近</string>
+    <string name="tab_Community">社群</string>
+    <string name="tab_Me">我</string>
+
+    <!--fragment_home-->
+    <string name="latest">最新发布</string>
+    <string name="popular_nearby">附近热门</string>
+    <string name="rank_week">本周排行</string>
+    <string name="rank_mouth">本月排行</string>
+
+    <!--fragment_home_tabs-->
+    <string-array name="tabs_home">
+        <item>最新发布</item>
+        <item>附近热门</item>
+        <item>本周排行</item>
+        <item>本月排行</item>
+    </string-array>
+    <string name="title_activity_rich_text">RichTextActivity</string>
+    <string name="title_activity_rich_text_test">RichTextTestActivity</string>
+    <string name="title_activity_comment_test">CommentTestActivity</string>
+
+    <!--评论详情页面 标题-->
+    <string name="reply_details_title">评论详情</string>
+    <string name="reply_details_allReply">全部回复:</string>
+
+    <!--dialog_comment-->
+    <string name="dialog_comment_reply">回复评论</string>
+    <string name="dialog_comment_share">分享评论</string>
+    <string name="dialog_comment_copy">复制评论</string>
+    <string name="dialog_comment_report">举报评论</string>
+</resources>
