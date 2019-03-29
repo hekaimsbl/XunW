@@ -27,4 +27,6 @@
     <color name="comment_reply_blue">#0e6daf</color>
 
     <color name="comment_like_pressed_red">#de4040</color>
+
+    <color name="homepage_bottom_navi_pressed">#ea5433</color>
 </resources>

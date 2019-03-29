@@ -132,7 +132,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
-            //actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
 
     }

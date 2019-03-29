@@ -2,18 +2,48 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hekai.xunw">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 允许程序访问WiFi网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 允许程序读写手机状态和身份 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".utils.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/xw_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/xw_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 高德地图Key -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="9bade83cea43639e872974c03e1760e1" />
+
+        <service android:name="com.amap.api.location.APSService" />
+
+        <!-- FileProvider -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.hekai.xunw.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/first_paths" />
+        </provider>
+
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,12 +65,29 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.DelicacyDetailsActivity"
-            android:theme="@style/FruitActivityTheme" />
+            android:theme="@style/FruitActivityTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.CommentTestActivity"
             android:label="@string/title_activity_comment_test"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.CommentReplyActivity"></activity>
+        <activity android:name=".activity.CommentReplyActivity" />
+        <activity android:name=".activity.FoodLocationMapActivity" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".activity.PersonCenterActivity"
+            android:label="@string/title_activity_person_center"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.PublishActivity"
+            android:label="@string/title_activity_publish"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,10 +25,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.hekai.xunw.Fragment.FindFragment;
+import com.example.hekai.xunw.Fragment.HomeFragment;
+import com.example.hekai.xunw.Fragment.MeFragment;
+import com.example.hekai.xunw.Fragment.WaitFragment;
 import com.example.hekai.xunw.Interface.PermissionListener;
 import com.example.hekai.xunw.R;
 import com.example.hekai.xunw.activityTest.CardItemActivity;
 import com.example.hekai.xunw.adapter.MainListAdapter;
+import com.example.hekai.xunw.adapter.MyViewPagerAdapter;
 import com.example.hekai.xunw.adapter.ViewPagerAdapter;
 import com.example.hekai.xunw.utils.BaseActivity;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -60,25 +68,12 @@ public class MainActivity extends BaseActivity {
      */
     private DrawerLayout mDrawerLayout;
 
-    /**
-     * 菜单标题
-     */
-    private final int[] TAB_TITLES = new int[]{
-            R.string.tab_Home,
-            R.string.tab_Near,
-            R.string.tab_Community,
-            R.string.tab_Me};
-
-    /**
-     * 菜单图标
-     */
-    private final int[] TAB_IMAGES = new int[]{
-            R.drawable.tab_main_home_selector,
-            R.drawable.tab_main_near_selector,
-            R.drawable.tab_main_community_selector,
-            R.drawable.tab_main_person_selector
+    String[] titles = new String[]{
+            "首页",
+            "附近",
+            "社群",
+            "我"
     };
-    private PagerAdapter adapter;
 
     /**
      * The View pager.
@@ -96,7 +91,6 @@ public class MainActivity extends BaseActivity {
             Manifest.permission.CAMERA
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,20 +101,33 @@ public class MainActivity extends BaseActivity {
         requestPermission();
         setupToolbarAndDrawerLayout();
         setupNavigationView();
-        initPager();
-        setupTabs(tabLayout,getLayoutInflater(),TAB_TITLES,TAB_IMAGES);
+        setPager();
     }
 
-    private void initPager() {
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
+    private void setPager() {
+        /**
+         * 菜单标题
+         */
+         int[] TAB_TITLES = new int[]{
+                R.string.tab_Home,
+                R.string.tab_Near,
+                R.string.tab_Community,
+                R.string.tab_Me};
 
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        /**
+         * 菜单图标
+         */
+        int[] TAB_IMAGES = new int[]{
+                R.drawable.tab_main_home_selector,
+                R.drawable.tab_main_near_selector,
+                R.drawable.tab_main_community_selector,
+                R.drawable.tab_main_person_selector
+        };
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //取消平滑切换
-                viewPager.setCurrentItem(tab.getPosition(),false);
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -133,19 +140,33 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-    }
 
-    private void setupTabs(TabLayout tabLayout, LayoutInflater layoutInflater, int[] TAB_TITLES, int[] TAB_IMAGES) {
-        for (int i = 0; i < TAB_IMAGES.length; i++) {
-            TabLayout.Tab tab = tabLayout.newTab();
-            View view = layoutInflater.inflate(R.layout.item_main_menu,null);
-            tab.setCustomView(view);
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new HomeFragment());
+        fragments.add(new WaitFragment());
+        fragments.add(new FindFragment());
+        fragments.add(new MeFragment());
 
-            TextView textView = view.findViewById(R.id.txt_tab);
+        MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(),fragments,titles);
+        viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setupWithViewPager(viewPager);
+
+        //设置自定义tab
+        for (int i = 0; i < myViewPagerAdapter.getCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(R.layout.item_main_menu);
+            TextView textView = tab.getCustomView().findViewById(R.id.txt_tab);
+            ImageView imageView = tab.getCustomView().findViewById(R.id.img_tab);
             textView.setText(TAB_TITLES[i]);
-            ImageView imageView = view.findViewById(R.id.img_tab);
             imageView.setImageResource(TAB_IMAGES[i]);
-            tabLayout.addTab(tab);
+            View view = tab.getCustomView();
+            if (i == 3){
+                view.setOnClickListener(v -> {
+                    startActivity(new Intent(MainActivity.this,PersonCenterActivity.class));
+                    tabLayout.getTabAt(0).select();
+                });
+            }
         }
     }
 
@@ -169,10 +190,10 @@ public class MainActivity extends BaseActivity {
         navView.setNavigationItemSelectedListener((menuItem) ->{
             switch (menuItem.getItemId()){
                 case R.id.nav_personal:
-                    startActivity(new Intent(MainActivity.this,CommentReplyActivity.class));
+                    startActivity(new Intent(MainActivity.this,PersonCenterActivity.class));
                     break;
                 case R.id.nav_location:
-                    startActivity(new Intent(MainActivity.this,FoodDetailsActivity.class));
+                    startActivity(new Intent(MainActivity.this,PublishActivity.class));
                     break;
                 case R.id.nav_cardTest:
                     startActivity(new Intent(MainActivity.this,DelicacyDetailsActivity.class));
@@ -205,7 +226,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.toolbar_settings:
                 startActivity(new Intent(MainActivity.this,CommentTestActivity.class));
-                Logger.d(TAG,"Toolbar_settings clicked");
+                break;
+            case R.id.toolbar_search:
+                startActivity(new Intent(MainActivity.this,SearchActivity.class));
                 break;
             default:
         }
@@ -215,6 +238,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu,menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 }

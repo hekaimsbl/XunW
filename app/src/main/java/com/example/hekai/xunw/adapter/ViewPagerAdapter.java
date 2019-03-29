@@ -1,5 +1,7 @@
 package com.example.hekai.xunw.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,6 +10,9 @@ import com.example.hekai.xunw.Fragment.FindFragment;
 import com.example.hekai.xunw.Fragment.HomeFragment;
 import com.example.hekai.xunw.Fragment.MeFragment;
 import com.example.hekai.xunw.Fragment.WaitFragment;
+import com.example.hekai.xunw.activity.MainActivity;
+import com.example.hekai.xunw.activity.PersonCenterActivity;
+import com.example.hekai.xunw.utils.MyApplication;
 
 import java.util.List;
 
@@ -39,7 +44,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
                 fragment = new FindFragment();
                 break;
             case 3:
-                fragment = new MeFragment();
                 break;
             default:
                 break;

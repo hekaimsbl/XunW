@@ -86,7 +86,6 @@ public class TabTestActivity extends AppCompatActivity {
             TabLayout.Tab tab = tabLayout.newTab();
             View view = layoutInflater.inflate(R.layout.item_main_menu,null);
             tab.setCustomView(view);
-
             TextView textView = view.findViewById(R.id.txt_tab);
             textView.setText(TAB_TITLES[i]);
             ImageView imageView = view.findViewById(R.id.img_tab);

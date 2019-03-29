@@ -44,6 +44,7 @@ public class BaseActivity extends AppCompatActivity{
                     permissionLists.toArray(new String[permissionLists.size()]),
                     PERMISSION_REQUESTCODE);
         }else{
+            /*表示全部已授权*/
             permissionListener.onGranted();
         }
     }

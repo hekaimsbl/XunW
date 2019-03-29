@@ -34,7 +34,7 @@ public class HottestFragment extends Fragment {
         }else {
             view = (View) container.getTag();
         }*/
-        view = inflater.inflate(R.layout.fragment_hottest,container,false);
+
         init();
         return view;
 
