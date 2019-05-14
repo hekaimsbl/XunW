@@ -1,29 +1,69 @@
-package com.example.hekai.xunw.bean;
+package Entity;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Service;
+
 import java.util.Date;
 
 /**
- * @author HeKai
- * @author hekaimsbl@gmail.com
- * @date 2019/3/7
+ * @Author Hekai
+ * @Date 2019/4/3 13:48
+ * @Description TODO
  **/
-public class Comment implements Serializable {
-    private String Id;
+@Alias("Comment")
+public class Comment {
+    //@Expose(serialize = false,deserialize = false)
+    @SerializedName("comment_id")
+    private int commentId;
+
+    @SerializedName("foodId")
     private String foodId;
-    private String userImgUrl;
-    private String userNickName;
-    private Date commentTime;
-    private int likesNumber;
+
+    @SerializedName("content")
     private String content;
+
+    @SerializedName("comment_userId")
+    private String commentUserId;
+
+    @SerializedName("likes_number")
+    private int likesNumber;
+
+    @SerializedName("reply_number")
     private int replyNumber;
 
-    public String getId() {
-        return Id;
+    @SerializedName("create_time")
+    private Date createTime;
+
+    @SerializedName("user_img")
+    private String userImg;
+
+    @SerializedName("user_name")
+    private String userName;
+
+    public int getCommentId() {
+        return commentId;
     }
 
-    public void setId(String id) {
-        Id = id;
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 
     public String getFoodId() {
@@ -34,28 +74,20 @@ public class Comment implements Serializable {
         this.foodId = foodId;
     }
 
-    public String getUserImgUrl() {
-        return userImgUrl;
+    public String getContent() {
+        return content;
     }
 
-    public void setUserImgUrl(String userImgUrl) {
-        this.userImgUrl = userImgUrl;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getUserNickName() {
-        return userNickName;
+    public String getCommentUserId() {
+        return commentUserId;
     }
 
-    public void setUserNickName(String userNickName) {
-        this.userNickName = userNickName;
-    }
-
-    public Date getCommentTime() {
-        return commentTime;
-    }
-
-    public void setCommentTime(Date commentTime) {
-        this.commentTime = commentTime;
+    public void setCommentUserId(String commentUserId) {
+        this.commentUserId = commentUserId;
     }
 
     public int getLikesNumber() {
@@ -66,19 +98,19 @@ public class Comment implements Serializable {
         this.likesNumber = likesNumber;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public int getReplyNumber() {
         return replyNumber;
     }
 
     public void setReplyNumber(int replyNumber) {
         this.replyNumber = replyNumber;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
