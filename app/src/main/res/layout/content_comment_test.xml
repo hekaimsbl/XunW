@@ -8,8 +8,15 @@
     tools:context=".activity.CommentTestActivity"
     tools:showIn="@layout/activity_comment_test">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/testRecycleView"
+    <Button
+        android:id="@+id/apliayTest"
+        android:text="支付宝"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content" />
+    <WebView
+        android:id="@+id/myWeb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </WebView>
 </android.support.constraint.ConstraintLayout>

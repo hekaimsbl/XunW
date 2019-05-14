@@ -1,11 +1,15 @@
 package com.example.hekai.xunw.activity;
 
 import android.Manifest;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
@@ -16,28 +20,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.hekai.xunw.Fragment.CommentInputDialogFragment;
 import com.example.hekai.xunw.Fragment.FindFragment;
 import com.example.hekai.xunw.Fragment.HomeFragment;
 import com.example.hekai.xunw.Fragment.MeFragment;
+import com.example.hekai.xunw.Fragment.RichEditorDialogFragment;
 import com.example.hekai.xunw.Fragment.WaitFragment;
 import com.example.hekai.xunw.Interface.PermissionListener;
 import com.example.hekai.xunw.R;
-import com.example.hekai.xunw.activityTest.CardItemActivity;
 import com.example.hekai.xunw.adapter.MainListAdapter;
 import com.example.hekai.xunw.adapter.MyViewPagerAdapter;
 import com.example.hekai.xunw.adapter.ViewPagerAdapter;
 import com.example.hekai.xunw.utils.BaseActivity;
+import com.example.hekai.xunw.utils.ToastUtil;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,8 +98,20 @@ public class MainActivity extends BaseActivity {
 
     private String[] PERMISSIONS = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_NETWORK_STATE,
+            Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.CHANGE_WIFI_STATE,
+            Manifest.permission.INTERNET,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.BLUETOOTH_ADMIN
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,7 +212,7 @@ public class MainActivity extends BaseActivity {
         navView.setNavigationItemSelectedListener((menuItem) ->{
             switch (menuItem.getItemId()){
                 case R.id.nav_personal:
-                    startActivity(new Intent(MainActivity.this,PersonCenterActivity.class));
+                    startActivity(new Intent(MainActivity.this,Camera22Activity.class));
                     break;
                 case R.id.nav_location:
                     startActivity(new Intent(MainActivity.this,PublishActivity.class));
@@ -218,6 +240,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -225,7 +248,7 @@ public class MainActivity extends BaseActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.toolbar_settings:
-                startActivity(new Intent(MainActivity.this,CommentTestActivity.class));
+                //startActivity(new Intent(MainActivity.this,Camera2Activity.class));
                 break;
             case R.id.toolbar_search:
                 startActivity(new Intent(MainActivity.this,SearchActivity.class));
@@ -239,5 +262,10 @@ public class MainActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

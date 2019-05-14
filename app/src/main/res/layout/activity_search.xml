@@ -21,7 +21,17 @@
             app:titleTextColor="@color/white" />
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_search" />
+    <ScrollView
+        android:id="@+id/search_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/search_result_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </FrameLayout>
+    </ScrollView>
 
 
 </android.support.design.widget.CoordinatorLayout>

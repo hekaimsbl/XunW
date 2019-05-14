@@ -1,6 +1,5 @@
-package com.miser.ceamera2demo;
+package com.example.hekai.xunw.camera2;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,14 +20,14 @@ import android.media.ImageReader;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.FloatMath;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.Range;
 import android.util.Size;
@@ -41,6 +40,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.hekai.xunw.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -421,7 +422,7 @@ public class Camera2Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_camera2, null);
+        View v = inflater.inflate(R.layout.fragment_cameraa, null);
         findview(v);
         mUIHandler = new Handler(new InnerCallBack());
         //初始化拍照的声音

@@ -5,7 +5,7 @@ package com.example.hekai.xunw.utils;
  * @Date 2019/3/26 16:13
  * @Description TODO
  **/
-public class Message {
+public class Messages {
     public static final int RESULT_OK = 200;
 
     public static final int RESULT_NOT_FOUND = 404;

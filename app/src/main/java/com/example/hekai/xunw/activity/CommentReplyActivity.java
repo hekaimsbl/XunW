@@ -57,14 +57,14 @@ public class CommentReplyActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        if (reply.getUserImgUrl() != null){
+        if (reply.getUserImg() != null){
             Glide.with(this)
-                    .load(reply.getUserImgUrl())
+                    .load(reply.getUserImg())
                     .thumbnail(0.5f)
                     .into(userLogo);
         }
-        userName.setText(reply.getUserNickName());
-        replyTime.setText(TimeUtils.utilDateToString(reply.getCommentTime()));
+        userName.setText(reply.getUserName());
+        replyTime.setText(TimeUtils.utilDateToString(reply.getCreateTime()));
         content.setText(reply.getContent());
         likesNumber.setText(String.valueOf(reply.getLikesNumber()));
 
@@ -75,21 +75,7 @@ public class CommentReplyActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        for (int i = 0; i < 4; i++) {
-            Comment comment = new Comment();
-            comment.setId(String.valueOf(i+10));
-            comment.setCommentTime(new Date());
-            comment.setContent("评论内容"+i);
-            comment.setFoodId(String.valueOf(i+10));
-            comment.setLikesNumber(100+i);
-            comment.setUserNickName("nickname"+i);
-            comments.add(comment);
-        }
 
-        reply.setUserNickName("nicknamee");
-        reply.setLikesNumber(1003);
-        reply.setCommentTime(new Date());
-        reply.setContent("zheiisisfisisiisisisisis");
     }
 
     private void setToolbar() {

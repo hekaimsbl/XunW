@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#020d41</color>
-    <color name="colorAccent">#9bb10d</color>
+    <color name="colorAccent">#11ECE6</color>
 
     <!--item_card-->
     <color name="white">#FFFFFF</color>
@@ -21,6 +21,8 @@
     <!--light_grey-->
     <color name="light_grey">#cccaca</color>
 
+    <color name="yellow">#F77F06</color>
+
     <!--深灰色字体_评论内容-->
     <color name="comment_dark_gray">#363636</color>
 
@@ -29,4 +31,5 @@
     <color name="comment_like_pressed_red">#de4040</color>
 
     <color name="homepage_bottom_navi_pressed">#ea5433</color>
+
 </resources>

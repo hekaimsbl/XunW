@@ -6,4 +6,5 @@ package com.example.hekai.xunw.Interface;
  * @date 2019/4/24
  **/
 public interface LoadMoreDataListener {
+    public abstract void loadMoreData();
 }

@@ -1,4 +1,4 @@
-package com.example.camera2demo;
+package com.example.hekai.xunw.activity;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,6 +16,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
@@ -24,11 +27,9 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+
+import com.example.hekai.xunw.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,15 +38,8 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.Executor;
 
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnShowRationale;
-import permissions.dispatcher.PermissionRequest;
-import permissions.dispatcher.RuntimePermissions;
-
-@RuntimePermissions
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class Camera22Activity extends AppCompatActivity implements View.OnClickListener {
     private String TAG = "MainActivity";
 
     private CameraManager cameraManager;
@@ -61,20 +55,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CameraDevice.StateCallback mStateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(@NonNull CameraDevice camera) {
-            MainActivity.this.cameraDevice = camera;
+            Camera22Activity.this.cameraDevice = camera;
             createPreviewSession();
         }
 
         @Override
         public void onDisconnected(@NonNull CameraDevice camera) {
             cameraDevice.close();
-            MainActivity.this.cameraDevice = null;
+            Camera22Activity.this.cameraDevice = null;
         }
 
         @Override
         public void onError(@NonNull CameraDevice camera, int error) {
             cameraDevice.close();
-            MainActivity.this.cameraDevice = null;
+            Camera22Activity.this.cameraDevice = null;
         }
     };
     private CameraCaptureSession cameraCaptureSession;
@@ -104,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     try {
                         captureRequest = captureRequestBuilder.build();
-                        MainActivity.this.cameraCaptureSession = session;
-                        MainActivity.this.cameraCaptureSession.setRepeatingRequest(captureRequest,null,backgroundHandler);
+                        Camera22Activity.this.cameraCaptureSession = session;
+                        Camera22Activity.this.cameraCaptureSession.setRepeatingRequest(captureRequest,null,backgroundHandler);
                     } catch (CameraAccessException e) {
                         e.printStackTrace();
                     }
@@ -131,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_camear22);
 
 
         textureView = findViewById(R.id.texture_preview);
@@ -147,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 1.
      */
-    @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void init() {
         cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
 
@@ -183,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void openCamera() {
         try {
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 cameraManager.openCamera(cameraId, mStateCallback, backgroundHandler);
             }
         } catch (CameraAccessException e) {
@@ -282,7 +275,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     public void createImageGallery() {
         File storageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         galleryFolder = new File(storageDirectory, getResources().getString(R.string.app_name));

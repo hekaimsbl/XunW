@@ -1,9 +1,7 @@
-package Entity;
+package com.example.hekai.xunw.bean;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import org.apache.ibatis.type.Alias;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
@@ -12,7 +10,6 @@ import java.util.Date;
  * @Date 2019/4/3 13:48
  * @Description TODO
  **/
-@Alias("Comment")
 public class Comment {
     //@Expose(serialize = false,deserialize = false)
     @SerializedName("comment_id")
@@ -25,21 +22,26 @@ public class Comment {
     private String content;
 
     @SerializedName("comment_userId")
+    @Expose(serialize = false)
     private String commentUserId;
 
     @SerializedName("likes_number")
     private int likesNumber;
 
     @SerializedName("reply_number")
+    @Expose(serialize = false)
     private int replyNumber;
 
     @SerializedName("create_time")
+    @Expose(serialize = false)
     private Date createTime;
 
     @SerializedName("user_img")
+    @Expose(serialize = false)
     private String userImg;
 
     @SerializedName("user_name")
+    @Expose(serialize = false)
     private String userName;
 
     public int getCommentId() {

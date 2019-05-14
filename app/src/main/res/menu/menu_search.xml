@@ -12,5 +12,6 @@
         android:id="@+id/toolbar_setting"
         android:icon="@drawable/ic_more_vert_black_24dp"
         android:orderInCategory="100"
+        android:title="..."
         app:showAsAction="never"/>
 </menu>

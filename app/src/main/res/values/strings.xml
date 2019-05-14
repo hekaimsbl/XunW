@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">寻味</string>
 
+    <string name="GaoDeWebServiceKey">51483941503f9b9a6f537cd30df868d9</string>
+
     <!--item_card-->
     <string name="test">this is test!</string>
 
@@ -64,12 +66,18 @@
     <string name="publishActivity_title">发布</string>
     <!--xml-->
     <string name="pub_xml_title">标题:</string>
+    <string name="pub_xml_tag">标签:</string>
     <string name="pub_xml_phone">电话:</string>
     <string name="pub_xml_businessTime">营业时间:</string>
     <string name="pub_xml_address">定位中...</string>
     <string name="pub_xml_uploadText">上传文本</string>
+    <string name="pub_xml_takeImg">拍  摄</string>
+    <string name="pub_xml_writerFile">编辑文本</string>
     <!--PublishActivity end-->
 
+    <!--SearchKeyResultFragment start-->
+    <string name="key_search_fragment_food_title">美食:</string>
+    <!--SearchKeyResultFragment end-->
 
     <!--dialog_choose_photo start-->
     <string name="item_choose_photo_takePhoto">拍照</string>

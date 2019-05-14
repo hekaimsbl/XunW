@@ -1,4 +1,4 @@
-package Entity;
+package com.example.hekai.xunw.bean;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class QueryData<T> implements Serializable {
     @SerializedName("msg")
     private String msg;
-    @SerializedName("data_queryKey")
+    @SerializedName(value = "data_q",alternate = "data_queryKey")
     private T data;
 
     public String getMsg() {

@@ -92,7 +92,7 @@ public class PersonCenterActivity extends AppCompatActivity implements TabLayout
         String imgUserUrl = null;
         if (imgUserUrl == null) {
             Glide.with(this)
-                    .load(R.drawable.default_head)
+                    .load(R.drawable.xw_logo)
                     .into(imgUser);
         }else {
             Glide.with(this)
@@ -105,7 +105,7 @@ public class PersonCenterActivity extends AppCompatActivity implements TabLayout
         imgPersonal.setBackgroundColor(ContextCompat.getColor(this,R.color.blue));
         if (imgPersonalUrl == null){
             Glide.with(this)
-                    .load(R.drawable.ic_image_black_24dp)
+                    .load(R.drawable.default_img)
                     .into(imgPersonal);
         }else {
             Glide.with(this)

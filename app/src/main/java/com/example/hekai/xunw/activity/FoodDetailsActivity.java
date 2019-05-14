@@ -1,5 +1,6 @@
 package com.example.hekai.xunw.activity;
 
+import android.content.Intent;
 import android.support.annotation.UiThread;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -54,14 +55,22 @@ public class FoodDetailsActivity extends AppCompatActivity {
     @BindDimen(R.dimen.small_s)
     int big;
 
+    private String foodId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_details);
+        getFoodId();
         init();
         setupToolbar();
         setData();
         getData();
+    }
+
+    private void getFoodId() {
+        Intent intent = getIntent();
+        foodId = intent.getStringExtra(FlagUtils.FOOD_ID);
     }
 
     private void setData() {

@@ -1,4 +1,4 @@
-package Utils;
+package com.example.hekai.xunw.utils;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,13 +10,13 @@ import java.io.Serializable;
  * @Description TODO
  **/
 public class ApiResult<T> implements Serializable {
-    @SerializedName("status_code")
+    @SerializedName(value = "statusCode",alternate = "status_code")
     private int Status;
 
-    @SerializedName("err_msg")
+    @SerializedName(value = "errorMsg",alternate = "err_msg")
     private String Error;
 
-    @SerializedName("data")
+    @SerializedName(value = "Data",alternate = "data")
     private T Data;
 
     public int getStatus() {

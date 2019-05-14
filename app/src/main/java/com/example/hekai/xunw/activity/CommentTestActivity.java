@@ -7,17 +7,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
 
+import com.alipay.sdk.app.EnvUtils;
+import com.alipay.sdk.app.H5PayCallback;
+import com.alipay.sdk.app.PayTask;
+import com.alipay.sdk.util.H5PayResultModel;
 import com.example.hekai.xunw.R;
 import com.example.hekai.xunw.adapter.CommentAdapter;
 import com.example.hekai.xunw.bean.Comment;
+import com.example.hekai.xunw.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  *
@@ -26,45 +37,83 @@ import butterknife.ButterKnife;
  *   @date 2019/3/10
  **/
 public class CommentTestActivity extends AppCompatActivity {
-    private CommentAdapter adapter;
-
-    ArrayList<Comment> comments = new ArrayList<>();
-
-    @BindView(R.id.testRecycleView)
-    RecyclerView recyclerView;
+    @BindView(R.id.apliayTest)
+    Button button;
+    @BindView(R.id.myWeb)
+    WebView mWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_test);
         init();
-        setupData();
-        setupRe();
     }
 
     private void init() {
         ButterKnife.bind(this);
     }
 
-    private void setupRe() {
-        GridLayoutManager layoutManager = new GridLayoutManager(this,1);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new CommentAdapter(this,comments);
-        recyclerView.setAdapter(adapter);
+    @OnClick(R.id.apliayTest)
+    public void clicked(){
+        ToastUtil.showMsg("button clicked");
+        WebSettings settings = mWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setMinimumFontSize(settings.getMinimumFontSize() + 8);
+        settings.setAllowFileAccess(false);
+        mWebView.setWebViewClient(new MyWebViewClient());
+        //mWebView.loadUrl();
     }
 
-    private void setupData() {
-        for (int i = 0; i < 4; i++) {
-            Comment comment = new Comment();
-            comment.setId(String.valueOf(i+10));
-            comment.setCommentTime(new Date());
-            comment.setContent("评论内容"+i);
-            comment.setFoodId(String.valueOf(i+10));
-            comment.setLikesNumber(i);
-            comment.setReplyNumber(10+i);
-            comment.setLikesNumber(100+i);
-            comment.setUserNickName("nickname"+i);
-            comments.add(comment);
+    private class MyWebViewClient extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(final WebView view, String url) {
+            if (!(url.startsWith("http") || url.startsWith("https"))) {
+                return true;
+            }
+
+            /**
+             * 推荐采用的新的二合一接口(payInterceptorWithUrl),只需调用一次
+             */
+            final PayTask task = new PayTask(CommentTestActivity.this);
+            boolean isIntercepted = task.payInterceptorWithUrl(url, true, new H5PayCallback() {
+                @Override
+                public void onPayResult(final H5PayResultModel result) {
+                    final String url=result.getReturnUrl();
+                    if(!TextUtils.isEmpty(url)){
+                        CommentTestActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.loadUrl(url);
+                            }
+                        });
+                    }
+                }
+            });
+
+            /**
+             * 判断是否成功拦截
+             * 若成功拦截，则无需继续加载该URL；否则继续加载
+             */
+            if(!isIntercepted){
+                view.loadUrl(url);}
+            return true;
+        }
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWebView != null) {
+            mWebView.removeAllViews();
+            try {
+                mWebView.destroy();
+            } catch (Throwable t) {
+            }
+            mWebView = null;
         }
     }
-
 }

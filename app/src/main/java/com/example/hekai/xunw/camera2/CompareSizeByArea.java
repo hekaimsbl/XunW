@@ -1,4 +1,4 @@
-package com.miser.ceamera2demo;
+package com.example.hekai.xunw.camera2;
 
 import android.util.Size;
 

@@ -1,7 +1,6 @@
-package Entity;
+package com.example.hekai.xunw.bean;
 
 import com.google.gson.annotations.SerializedName;
-import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
 
@@ -10,7 +9,6 @@ import java.util.Date;
  * @Date 2019/4/7 10:52
  * @Description TODO
  **/
-@Alias("Reply")
 public class Reply {
     @SerializedName("id")
     private int id;

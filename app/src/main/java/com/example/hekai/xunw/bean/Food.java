@@ -1,7 +1,11 @@
 package com.example.hekai.xunw.bean;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author HeKai
@@ -9,59 +13,79 @@ import java.util.Date;
  * @date 2018/12/28
  **/
 public class Food implements Serializable {
-    private int FoodId;
-    private String imgUrl;
-    private String author;
-    private Date time;
+    @SerializedName("id")
+    @Expose(serialize = false)
+    private String foodId;
+
+    @SerializedName("title")
     private String title;
-    private Double distance;
-    private String mdText;
-    private int likes;
-    private String tips;
+
+    @SerializedName("author_id")
+    private String authorId;
+
+    @SerializedName("user_name")
+    @Expose(serialize = false)
+    private String userName;
+
+    @SerializedName("content")
+    private String content;
+
+    @SerializedName("business_time")
     private String businessTime;
-    private String phone;
-    private String address;
-    private Double latitude;
+
+    @SerializedName("phone_number")
+    private String phoneNumber;
+
+    @SerializedName("longitude")
     private Double longitude;
 
-    public String getMdText() {
-        return mdText;
+    @SerializedName("latitude")
+    private Double latitude;
+
+    @SerializedName("address")
+    private String address;
+
+    @SerializedName("create_time")
+    private Date date;
+
+    @SerializedName("image_url")
+    private List<String> imageUrls;
+
+    @SerializedName("tags")
+    private List<String> tags;
+
+    @SerializedName("recommend_number")
+    @Expose(serialize = false)
+    private int recommendNumber;
+
+    @SerializedName("city_code")
+    private String cityCode;
+
+    @Expose(serialize = false,deserialize = false)
+    private String distance;
+
+    public String getContent() {
+        return content;
     }
 
-    public void setMdText(String mdText) {
-        this.mdText = mdText;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public int getFoodId() {
-        return FoodId;
+    public String getCityCode() {
+        return cityCode;
     }
 
-    public void setFoodId(int foodId) {
-        FoodId = foodId;
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getFoodId() {
+        return foodId;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
+    public void setFoodId(String foodId) {
+        this.foodId = foodId;
     }
 
     public String getTitle() {
@@ -72,28 +96,20 @@ public class Food implements Serializable {
         this.title = title;
     }
 
-    public Double getDistance() {
-        return distance;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setDistance(Double distance) {
-        this.distance = distance;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
-    public int getLikes() {
-        return likes;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
-    public String getTips() {
-        return tips;
-    }
-
-    public void setTips(String tips) {
-        this.tips = tips;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getBusinessTime() {
@@ -104,20 +120,20 @@ public class Food implements Serializable {
         this.businessTime = businessTime;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getAddress() {
-        return address;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public Double getLatitude() {
@@ -128,11 +144,51 @@ public class Food implements Serializable {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
-        return longitude;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public int getRecommendNumber() {
+        return recommendNumber;
+    }
+
+    public void setRecommendNumber(int recommendNumber) {
+        this.recommendNumber = recommendNumber;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 }
